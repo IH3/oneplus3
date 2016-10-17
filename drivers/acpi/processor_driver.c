@@ -183,7 +183,7 @@ static int __acpi_processor_start(struct acpi_device *device)
 	if (pr->flags.throttling)
 		pr->flags.limit = 1;
 
-	if (!cpuidle_get_driver() || cpuidle_get_driver() == &acpi_idle_driver)
+	if (!cpuidle_get_driver() || acpi_processor_using_idle_driver())
 		acpi_processor_power_init(pr);
 
 	pr->cdev = thermal_cooling_device_register("Processor", device,

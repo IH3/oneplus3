@@ -336,7 +336,7 @@ int acpi_processor_power_init(struct acpi_processor *pr);
 int acpi_processor_power_exit(struct acpi_processor *pr);
 int acpi_processor_cst_has_changed(struct acpi_processor *pr);
 int acpi_processor_hotplug(struct acpi_processor *pr);
-extern struct cpuidle_driver acpi_idle_driver;
+int acpi_processor_using_idle_driver(void);
 
 #ifdef CONFIG_PM_SLEEP
 void acpi_processor_syscore_init(void);
@@ -360,6 +360,10 @@ static inline void acpi_thermal_cpufreq_init(void)
 static inline void acpi_thermal_cpufreq_exit(void)
 {
 	return;
+}
+static inline int acpi_processor_using_idle_driver(void)
+{
+	return 0;
 }
 #endif
 
