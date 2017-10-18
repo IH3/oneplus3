@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 3.18.74 Kernel Configuration
+# Linux/arm64 3.18.76 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -3900,6 +3900,7 @@ CONFIG_EFI_RUNTIME_WRAPPERS=y
 CONFIG_EFI_ARMSTUB=y
 CONFIG_MSM_TZ_LOG=y
 # CONFIG_BIF is not set
+CONFIG_DEFRAG_HELPER=y
 
 #
 # Firmware Drivers
