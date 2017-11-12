@@ -34,7 +34,7 @@ export KBUILD_BUILD_HOST=jarvisbox
 # Paths
 WORKING_DIR=$(pwd)
 ANYKERNEL_DIR="${WORKING_DIR}/../AnyKernel2"
-TOOLCHAIN_DIR="${WORKING_DIR}/../../toolchains/aarch64-linux-gnu/"
+TOOLCHAIN_DIR="${WORKING_DIR}/../../../xossrc/prebuilts/clang/host/linux-x86/clang-stable/bin/"
 REPACK_DIR="${ANYKERNEL_DIR}"
 OUT_DIR="${WORKING_DIR}/out/"
 ZIP_MOVE="${WORKING_DIR}/zips/"
@@ -78,18 +78,6 @@ function reportSuccess {
     echo -e "==  ${1}  =="
     echo -e "====$( for i in $( seq ${#1} ); do echo -e "=\c"; done )===="
     echo -e ${CL_RST}
-}
-
-function check_toolchain() {
-
-    export TC="$(find ${TOOLCHAIN_DIR}/bin -type f -name *-gcc)";
-
-        if [[ -f "${TC}" ]]; then
-                export CROSS_COMPILE="${TOOLCHAIN_DIR}/bin/$(echo ${TC} | awk -F '/' '{print $NF'} | sed -e 's/gcc//')";
-                echoText "$Using toolchain: $(${CROSS_COMPILE}gcc --version | head -1)"
-        else
-                reportError "No suitable toolchain found in ${TOOLCHAIN_DIR}";
-        fi
 }
 
 function make_kernel {
@@ -166,7 +154,7 @@ done
 DATE_START=$(date +"%s")
 
 # Make
-check_toolchain
+export CROSS_COMPILE="${TOOLCHAIN_DIR}"
 if [ ${ONLY_ZIP} ]; then
   make_zip
 else
